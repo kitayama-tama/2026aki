@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>就活の現在地チェック｜3年生（28卒）向け</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&family=Noto+Sans+JP:wght@400;500;700&display=swap">
+<style>
+:root{
+  --bg:#faf7f0;--card:#ffffff;--ink:#22261f;--sub:#4d5348;--line:#c9d3c7;
+  --green:#2f5d46;--green-soft:#eef2ea;--cta:#b0521f;--cta-soft:#fbf1ea;--on:#faf7f0;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--bg:#151a16;--card:#1f2620;--ink:#ecefe8;--sub:#b5bdb0;--line:#39443a;--green:#8fc4a4;--green-soft:#233128;--cta:#f0a070;--cta-soft:#34261d;--on:#151a16;}
+}
+:root[data-theme="dark"]{--bg:#151a16;--card:#1f2620;--ink:#ecefe8;--sub:#b5bdb0;--line:#39443a;--green:#8fc4a4;--green-soft:#233128;--cta:#f0a070;--cta-soft:#34261d;--on:#151a16;}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans JP','Hiragino Sans','Yu Gothic',sans-serif;line-height:1.7}
+.wrap{max-width:720px;margin:0 auto;padding:32px 20px 64px}
+.eyebrow{color:var(--green);font-weight:700;font-size:.85rem;letter-spacing:.15em}
+h1{font-family:'Noto Serif JP',serif;font-size:clamp(1.7rem,5vw,2.3rem);line-height:1.35;margin:.3rem 0 .6rem}
+.lead{color:var(--sub);margin:0 0 1.5rem}
+.progress{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin:0 0 1.5rem}
+.progress>span{display:block;height:100%;width:0;background:var(--green);transition:width .3s}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px}
+.qnum{color:var(--green);font-weight:700;font-size:.9rem}
+.qtext{font-size:1.2rem;font-weight:700;margin:.3rem 0 1.2rem}
+.choices{display:grid;gap:10px}
+button{font:inherit;cursor:pointer}
+.choice{min-height:52px;text-align:left;padding:12px 16px;border-radius:10px;border:1.5px solid var(--line);background:var(--card);color:var(--ink)}
+.choice:hover,.choice:focus-visible{border-color:var(--green);outline:none;background:var(--green-soft)}
+.back{margin-top:16px;background:none;border:none;color:var(--sub);text-decoration:underline;padding:8px 0;min-height:44px}
+.hidden{display:none !important}
+.stage{display:flex;gap:16px;align-items:center;margin-bottom:12px}
+.stage svg{flex:0 0 64px}
+.stage h2{font-family:'Noto Serif JP',serif;margin:0;font-size:1.5rem;line-height:1.3}
+.stage small{color:var(--green);font-weight:700}
+.section-title{font-weight:700;margin:1.4rem 0 .4rem}
+ul.todo{margin:0;padding-left:1.2rem}
+ul.todo li{margin:.3rem 0}
+.cta{margin-top:1.5rem;border:2px solid var(--cta);background:var(--cta-soft);border-radius:14px;padding:20px}
+.cta h3{margin:0 0 .4rem;color:var(--cta);font-size:1.15rem}
+.cta p{margin:.3rem 0}
+.cta .info{font-size:.95rem;color:var(--sub)}
+.btn{display:inline-block;margin-top:12px;min-height:48px;padding:12px 22px;border-radius:10px;background:var(--cta);color:var(--on);font-weight:700;border:none;text-decoration:none}
+.btn.ghost{background:none;color:var(--green);border:1.5px solid var(--green);margin-left:8px}
+.inputbox{margin-top:16px;display:grid;gap:8px}
+.inputbox label{font-weight:700;font-size:.95rem}
+.inputbox textarea{font:inherit;min-height:88px;padding:10px 12px;border-radius:10px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);resize:vertical}
+.inputbox textarea:focus{outline:none;border-color:var(--green)}
+.next{min-height:48px;padding:10px 20px;border-radius:10px;border:none;background:var(--green);color:var(--on);font-weight:700;justify-self:start}
+.summary{margin-top:1.4rem;background:var(--green-soft);border-radius:12px;padding:16px 18px}
+.summary dl{margin:.4rem 0 0;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:.95rem}
+.summary dt{font-weight:700;color:var(--green)}
+.summary dd{margin:0;white-space:pre-wrap}
+.copy{margin-top:10px;min-height:44px;padding:8px 16px;border-radius:10px;border:1.5px solid var(--green);background:none;color:var(--green);font-weight:700}
+.picker{margin:14px 0 6px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
+.picker h4{margin:0 0 4px;font-size:1rem}
+.picker .hint{margin:0 0 10px;font-size:.88rem;color:var(--sub)}
+.calhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.calhead button{min-width:44px;min-height:40px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.calhead button:disabled{opacity:.35;cursor:default}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.cal .dow{font-size:.8rem;color:var(--sub);padding:2px 0}
+.cal .d{min-height:40px;border-radius:8px;border:1px solid transparent;background:none;color:var(--sub);font-size:.95rem}
+.cal .d.ok{background:var(--green-soft);color:var(--ink);border-color:var(--line)}
+.cal .d.ok:hover,.cal .d.ok:focus-visible{border-color:var(--green);outline:none}
+.cal .d.sel{background:var(--green);color:var(--on);border-color:var(--green);font-weight:700}
+.cal .d:disabled{opacity:.35;cursor:default}
+.slots{display:grid;gap:8px;margin-top:12px}
+.slot{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;border:1px dashed var(--line);font-size:.95rem}
+.slot.filled{border-style:solid;border-color:var(--green)}
+.slot b{min-width:4.5em}
+.slot select{font:inherit;min-height:40px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:4px 8px}
+.slot .x{margin-left:auto;min-height:36px;min-width:36px;border-radius:8px;border:1px solid var(--line);background:none;color:var(--sub)}
+.note{font-size:.85rem;color:var(--sub);margin-top:2rem;text-align:center}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="eyebrow">3年生（28卒）のみなさんへ</div>
+  <h1>就活の「現在地」チェック</h1>
+  <p class="lead">10の質問に答えるだけ（約2分）。いまの自分がどのあたりにいて、この秋に何をすればいいかが分かります。正解・不正解はありません。</p>
+
+  <div class="progress" aria-hidden="true"><span id="bar"></span></div>
+
+  <section id="quiz" class="card" aria-live="polite">
+    <div class="qnum" id="qnum"></div>
+    <div class="qtext" id="qtext"></div>
+    <div class="choices" id="choices"></div>
+    <div class="inputbox hidden" id="inputbox">
+      <label for="freetext" id="inputLabel"></label>
+      <textarea id="freetext"></textarea>
+      <button class="next" type="button" id="next">次へ</button>
+    </div>
+    <button class="back hidden" id="back" type="button">← ひとつ前に戻る</button>
+  </section>
+
+  <section id="result" class="card hidden" aria-live="polite">
+    <div class="stage">
+      <svg viewBox="0 0 64 64" width="64" height="64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--green)"><path id="icon" d=""></path><path d="M14 58h36"></path></svg>
+      <div><small id="stageLabel"></small><h2 id="stageTitle"></h2></div>
+    </div>
+    <p id="stageMsg"></p>
+    <div class="section-title">この秋のおすすめアクション</div>
+    <ul class="todo" id="todo"></ul>
+
+    <div class="summary">
+      <strong>あなたの回答まとめ（予約したら、面談のときにこの画面を見せてください）</strong>
+      <dl id="summary"></dl>
+    </div>
+
+    <div class="cta" id="cta">
+      <h3 id="ctaTitle"></h3>
+      <p id="ctaMsg"></p>
+      <p class="info">予約：kitayama@tama.ac.jp へメールで。場所：キャリア支援課 [場所]　／　1回 [30]分程度</p>
+      <div class="picker">
+        <h4>希望日時を3つまで選んでください</h4>
+        <p class="hint">面談は<b>月〜木曜日の10:00〜17:00</b>です（金曜日はお休み）。カレンダーで日付をタップし、開始時刻を選んでください。同じ日に別の時刻を希望する場合は、同じ日付をもう一度タップしてください。</p>
+        <div class="calhead"><button type="button" id="prevM" aria-label="前の月">‹</button><strong id="calTitle"></strong><button type="button" id="nextM" aria-label="次の月">›</button></div>
+        <div class="cal" id="cal"></div>
+        <div class="slots" id="slots"></div>
+        <p class="hint hidden" id="fullWarn" style="color:var(--cta);margin-top:8px">希望日は3つまでです。変更するときは「×」で外してから選んでください。</p>
+        <p class="hint hidden" id="timeWarn" style="color:var(--cta);margin-top:8px">開始時刻が未選択の希望日があります。プルダウンで選んでください。</p>
+      </div>
+      <!-- 予約システム（学生向けページ）のURLが決まったら、ここにボタンを戻す -->
+      <div style="margin-top:4px">
+        <a class="btn" style="margin-left:0" href="#" id="reserve" target="_blank" rel="noopener">メールで予約する（希望日3つ）</a>
+        <p class="info" style="margin-top:14px">※ボタンを押してもメールアプリが開かないとき（大学のGmailをブラウザで使っている場合、スマホのメール設定によっては開かない場合など）は、下の「メール本文をコピー」を押し、Gmailの新規メールに貼り付けて kitayama@tama.ac.jp へ送ってください。回答まとめも一緒にコピーされます。</p>
+        <button class="btn ghost" style="margin-left:0;margin-top:4px" type="button" id="copymail">メール本文をコピー</button>
+                
+      </div>
+      
+    </div>
+  </section>
+
+  <p style="text-align:center;margin-top:16px"><button class="back" type="button" id="retry">もう一度チェックする</button></p>
+  <p class="note">多摩大学 キャリア支援課　キャリアカウンセラー 北山 四郎<br>回答はこの画面の中だけで使われ、どこにも送信されません。</p>
+</main>
+
+<script>
+const RESERVE_MAIL = "kitayama@tama.ac.jp";
+
+const Q = [
+  {t:"インターンシップ（オープン・カンパニー／1day仕事体験を含む）に参加した", key:"intern",
+   a:[["参加した",2],["申し込んだ・探している",1],["まだ",0]],
+   input:{when:[0,1], label:"参加した（申し込んだ）企業名を書いてください（複数あれば改行で）", placeholder:"例）〇〇株式会社（1day）\n△△信用金庫（オープン・カンパニー）"}},
+  {t:"気になる業界や仕事を、2つ以上あげられる", a:[["あげられる",2],["1つくらいなら",1],["まだ思いつかない",0]]},
+  {t:"学生時代に力を入れたこと（ガクチカ）を、人に説明できる", a:[["説明できる",2],["なんとなくなら",1],["まだ難しい",0]]},
+  {t:"自分の強みを、エピソード付きで言える", a:[["言える",2],["強みの言葉だけなら",1],["まだ",0]]},
+  {t:"早期選考について、あなたの現在の状況は？", key:"early",
+   a:[["早期選考に進んでいる",2],["案内・声がかかった企業がある",1],["特にない・分からない",0]],
+   input:{when:[0,1], label:"企業名と、いまの段階を書いてください（例：一次面接待ち）", placeholder:"例）〇〇株式会社　一次面接待ち\n△△株式会社　早期選考の案内あり"}},
+  {t:"エントリーシート（ES）の準備は？", key:"es", a:[["提出できる形に仕上がっている",2],["下書き（ベース）がある",1],["まだ手をつけていない",0]]},
+  {t:"面接対策の準備は？", key:"interview", a:[["練習している（模擬面接など）",2],["聞かれることを調べた程度",1],["まだ",0]]},
+  {t:"MyCareerBoxやOfferBoxなどに、プロフィールを登録・入力している", a:[["入力している",2],["登録だけした",1],["まだ",0]]},
+  {t:"キャリア支援課の面談を、この3か月以内に利用した", a:[["利用した",2],["以前に一度だけ",1],["まだない",0]], key:"visit"},
+  {t:"最近の気持ちに、いちばん近いものは？", a:[["前向きに進めている",2],["少し不安だけど動いている",1],["考えるのが億劫で、つい避けている",0]], key:"mood"}
+];
+
+const STAGES = [
+  {min:0, label:"STAGE 1", title:"種の時期", icon:"M32 50c-5 0-8-3-8-7s4-8 8-8 8 4 8 8-3 7-8 7z",
+   msg:"いまは土の中で力を蓄えているところ。ここからのスタートで十分間に合います。ひとりで抱えず、まず一緒に「最初の一歩」を決めましょう。",
+   todo:["キャリア支援課の面談を1回予約する（準備ゼロでOK）","ガクチカを箇条書きでメモしてみる（ESのベースの第一歩）","MyCareerBox・OfferBoxなどに登録だけして「入力できる状態」にする"]},
+  {min:7, label:"STAGE 2", title:"芽が出はじめた時期", icon:"M32 56V34M32 40c-7 0-11-4-11-11 7 0 11 4 11 11zM32 34c0-7 4-11 11-11 0 7-4 11-11 11z",
+   msg:"動き始めの芽が出ています。あとは「知る」と「言葉にする」を少しずつ積み重ねていけば、春からがぐっと楽になります。",
+   todo:["【作る】ESのベース（ガクチカ・自己PR・学業）を下書きする","【貯める】下書きをMyCareerBoxに登録する","書けなくて止まったら、そのまま面談へ持ってくる"]},
+  {min:12, label:"STAGE 3", title:"若木の時期", icon:"M32 56V22M32 38c-9 0-14-5-14-13 9 0 14 5 14 13zM32 30c0-9 5-14 14-14 0 9-5 14-14 14zM32 46c6 0 10-3 10-9",
+   msg:"しっかり根が張ってきています。ここからは、自分に合う会社を「見極める」段階。視野を広げつつ、軸を言葉にしていきましょう。",
+   todo:["【作る】ESのベースを面談で見直して仕上げる","【貯める】MyCareerBoxを充実させる","【届ける】OfferBoxなどスカウト型サービスの基本項目を入力する"]},
+  {min:16, label:"STAGE 4", title:"枝を広げる時期", icon:"M32 56V18M32 30c-10 0-16-6-16-14 10 0 16 6 16 14zM32 24c0-10 6-14 16-14 0 8-6 14-16 14zM32 42c-8 0-12-4-12-10 8 0 12 4 12 10zM32 38c0-6 4-10 12-10 0 6-4 10-12 10z",
+   msg:"とても順調です。早期選考の準備も視野に。一方で、周りを急かされる感覚に流されず、自分の軸を大切にしてください。",
+   todo:["早期選考の企業ごとに、志望動機と想定質問を整理する","模擬面接を予約して実戦で確かめる","スカウト型サービスのプロフィールを磨き、届いたオファーを面談で一緒に検討する"]}
+];
+
+let i = 0; const ans = []; const texts = {};
+const $ = id => document.getElementById(id);
+const idx = k => Q.findIndex(q => q.key === k);
+
+function advance(){ i++; i < Q.length ? render() : showResult(); }
+
+function render(){
+  $("bar").style.width = (i / Q.length * 100) + "%";
+  $("qnum").textContent = `Q${i+1} / ${Q.length}`;
+  $("qtext").textContent = Q[i].t;
+  $("inputbox").classList.add("hidden");
+  const box = $("choices"); box.replaceChildren();
+  Q[i].a.forEach(([label,score], n) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "choice"; b.textContent = label;
+    b.onclick = () => {
+      ans[i] = score;
+      const inp = Q[i].input;
+      if (inp && inp.when.includes(n)) {
+        box.querySelectorAll(".choice").forEach(c => c.style.borderColor = "");
+        b.style.borderColor = "var(--green)";
+        $("inputLabel").textContent = inp.label;
+        $("freetext").placeholder = inp.placeholder;
+        $("freetext").value = texts[Q[i].key] || "";
+        $("inputbox").classList.remove("hidden");
+        $("freetext").focus();
+      } else {
+        if (Q[i].key) delete texts[Q[i].key];
+        advance();
+      }
+    };
+    box.appendChild(b);
+  });
+  $("back").classList.toggle("hidden", i === 0);
+}
+
+$("next").onclick = () => { texts[Q[i].key] = $("freetext").value.trim(); advance(); };
+
+
+let updateMail = () => {};
+// ===== 希望日時ピッカー（月〜木 10:00〜17:00、10分刻み） =====
+const DOW = ["日","月","火","水","木","金","土"];
+const OPEN_DOW = [1,2,3,4];            // 月〜木
+const DAY_START = 10*60, LAST_START = 16*60+30; // 開始時刻 10:00〜16:30（30分面談で17:00まで）
+const MAX_WEEKS = 6;                    // 何週間先まで選べるか
+const today = new Date(); today.setHours(0,0,0,0);
+const minDate = new Date(today); minDate.setDate(minDate.getDate()+1);   // 翌日から
+const maxDate = new Date(today); maxDate.setDate(maxDate.getDate()+MAX_WEEKS*7);
+let viewY = minDate.getFullYear(), viewM = minDate.getMonth();
+const picks = [null,null,null];          // {date:Date, time:"10:00"}
+const pad = n => String(n).padStart(2,"0");
+const key = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const fmt = d => `${d.getMonth()+1}月${d.getDate()}日（${DOW[d.getDay()]}）`;
+const TIMES = []; for (let t=DAY_START; t<=LAST_START; t+=10) TIMES.push(`${pad(Math.floor(t/60))}:${pad(t%60)}`);
+
+function drawCal(){
+  $("calTitle").textContent = `${viewY}年${viewM+1}月`;
+  const first = new Date(viewY, viewM, 1), last = new Date(viewY, viewM+1, 0);
+  $("prevM").disabled = (viewY < minDate.getFullYear()) || (viewY===minDate.getFullYear() && viewM<=minDate.getMonth());
+  $("nextM").disabled = (viewY > maxDate.getFullYear()) || (viewY===maxDate.getFullYear() && viewM>=maxDate.getMonth());
+  const cal = $("cal"); cal.replaceChildren();
+  DOW.forEach(d => { const e=document.createElement("div"); e.className="dow"; e.textContent=d; cal.appendChild(e); });
+  for (let k=0; k<first.getDay(); k++) cal.appendChild(document.createElement("div"));
+  for (let day=1; day<=last.getDate(); day++){
+    const d = new Date(viewY, viewM, day);
+    const b = document.createElement("button"); b.type="button"; b.className="d"; b.textContent=day;
+    const ok = OPEN_DOW.includes(d.getDay()) && d>=minDate && d<=maxDate;
+    if (ok) {
+      b.classList.add("ok");
+      if (picks.some(p => p && key(p.date)===key(d))) b.classList.add("sel");
+      b.setAttribute("aria-label", fmt(d));
+      b.onclick = () => togglePick(d);
+    } else { b.disabled = true; }
+    cal.appendChild(b);
+  }
+}
+function togglePick(d){
+  const free = picks.findIndex(p => !p);
+  if (free<0) { $("fullWarn").classList.remove("hidden"); return; }
+  $("fullWarn").classList.add("hidden");
+  picks[free] = {date:d, time:""};
+  drawCal(); drawSlots(); updateMail();
+}
+function drawSlots(){
+  const box = $("slots"); box.replaceChildren();
+  picks.forEach((p,n) => {
+    const row = document.createElement("div"); row.className = "slot" + (p ? " filled" : "");
+    const lab = document.createElement("b"); lab.textContent = `第${n+1}希望`; row.appendChild(lab);
+    if (!p) { const t=document.createElement("span"); t.style.color="var(--sub)"; t.textContent="カレンダーから日付を選択"; row.appendChild(t); box.appendChild(row); return; }
+    const t = document.createElement("span"); t.textContent = fmt(p.date); row.appendChild(t);
+    const sel = document.createElement("select"); sel.setAttribute("aria-label", `第${n+1}希望の開始時刻`);
+    const o0 = document.createElement("option"); o0.value=""; o0.textContent="開始時刻を選択"; sel.appendChild(o0);
+    TIMES.forEach(tm => { const o=document.createElement("option"); o.value=tm; o.textContent=tm+"〜"; if (tm===p.time) o.selected=true; sel.appendChild(o); });
+    sel.onchange = () => { p.time = sel.value; updateMail(); };
+    row.appendChild(sel);
+    const x = document.createElement("button"); x.type="button"; x.className="x"; x.textContent="×"; x.setAttribute("aria-label",`第${n+1}希望を外す`);
+    x.onclick = () => { picks[n]=null; $("fullWarn").classList.add("hidden"); drawCal(); drawSlots(); updateMail(); };
+    row.appendChild(x);
+    box.appendChild(row);
+  });
+}
+$("prevM").onclick = () => { viewM--; if (viewM<0){viewM=11;viewY--;} drawCal(); };
+$("nextM").onclick = () => { viewM++; if (viewM>11){viewM=0;viewY++;} drawCal(); };
+function pickLines(){
+  return picks.map((p,n) => `　${n+1}）` + (p ? `${fmt(p.date)} ${p.time ? p.time+"〜" : "（時刻未選択）"}` : ""));
+}
+drawCal(); drawSlots();
+
+function label(k){ const q = Q[idx(k)]; const a = q.a.find(x => x[1] === ans[idx(k)]); return a ? a[0] : ""; }
+
+function showResult(){
+  $("bar").style.width = "100%";
+  const total = ans.reduce((s,v)=>s+v,0);
+  const st = [...STAGES].reverse().find(s => total >= s.min);
+  $("stageLabel").textContent = st.label;
+  $("stageTitle").textContent = st.title;
+  $("stageMsg").textContent = st.msg;
+  $("icon").setAttribute("d", st.icon);
+  const ul = $("todo"); ul.replaceChildren();
+  st.todo.forEach(t => { const li = document.createElement("li"); li.textContent = t; ul.appendChild(li); });
+
+  const rows = [
+    ["現在地", `${st.label}　${st.title}`],
+    ["インターン", label("intern") + (texts.intern ? "\n" + texts.intern : "")],
+    ["早期選考", label("early") + (texts.early ? "\n" + texts.early : "")],
+    ["ES", label("es")],
+    ["面接対策", label("interview")],
+    ["最近の気持ち", label("mood")]
+  ];
+  const dl = $("summary"); dl.replaceChildren();
+  rows.forEach(([k,v]) => { const dt=document.createElement("dt"); dt.textContent=k; const dd=document.createElement("dd"); dd.textContent=v; dl.append(dt,dd); });
+
+
+  const avoiding = ans[idx("mood")] === 0;
+  const inEarly = ans[idx("early")] === 2;
+  const unprepared = ans[idx("es")] === 0 || ans[idx("interview")] === 0;
+  let title, msg;
+  if (avoiding) {
+    title = "少し遠ざかっているあなたへ";
+    msg = "考えるのが億劫になるのは、珍しいことではありません。責めるための面談ではなく、一緒に地図を広げる時間です。準備ゼロで、一度だけ話しに来てください。";
+  } else if (inEarly && unprepared) {
+    title = "早期選考の対策は、いまがチャンスです";
+    msg = "選考が進んでいるのに、ESや面接の準備がまだの項目があります。間に合ううちに、面談で一緒に対策しましょう。";
+  } else if (inEarly) {
+    title = "早期選考、面談で一緒に仕上げましょう";
+    msg = "企業ごとの志望動機の確認や模擬面接ができます。まとめ画面を見せてもらえればすぐに始められます。";
+  } else if (ans[idx("visit")] === 0 || total < 12) {
+    title = "まずは一度、面談で話してみませんか";
+    msg = "今の状況を話すだけで、次にやることがはっきりします。この結果画面を見せてもらえればOKです。";
+  } else {
+    title = "面談で、さらに一歩先へ";
+    msg = "ES・面接の準備や企業選びの相談もできます。いまの勢いを形にしていきましょう。";
+  }
+  $("ctaTitle").textContent = title;
+  $("ctaMsg").textContent = msg;
+  const buildBody = () => [
+    "北山先生",
+    "",
+    "面談を予約したく、ご連絡しました。",
+    "",
+    "氏名：",
+    "学籍番号：",
+    "ゼミ：",
+    "希望日時（第1〜第3希望）：",
+    ...pickLines(),
+    "相談したいこと：",
+    "",
+    "――― 就活の現在地チェック結果 ―――",
+    ...rows.map(([k,v]) => `■${k}：${v}`),
+    "",
+    "よろしくお願いいたします。"
+  ].join("\n");
+  updateMail = () => {
+    $("reserve").href = `mailto:${RESERVE_MAIL}?subject=${encodeURIComponent("【面談予約希望】就活の現在地チェックより")}&body=${encodeURIComponent(buildBody())}`;
+    const missing = picks.some(p => p && !p.time);
+    $("timeWarn").classList.toggle("hidden", !missing);
+  };
+  updateMail();
+  $("copymail").textContent = "メール本文をコピー";
+  $("copymail").onclick = async () => {
+    const full = `宛先：${RESERVE_MAIL}\n件名：【面談予約希望】就活の現在地チェックより\n\n${buildBody()}`;
+    try { await navigator.clipboard.writeText(full); $("copymail").textContent = "コピーしました（Gmailに貼り付けてください）"; }
+    catch(e){ $("copymail").textContent = "コピーできませんでした（画面を撮影してください）"; }
+  };
+
+
+  $("quiz").classList.add("hidden");
+  $("result").classList.remove("hidden");
+  $("result").scrollIntoView({behavior:"smooth", block:"start"});
+}
+
+$("back").onclick = () => { if (i > 0) { i--; render(); } };
+$("retry").onclick = () => { $("fullWarn").classList.add("hidden"); picks.fill(null); drawCal(); drawSlots(); i = 0; ans.length = 0; for (const k in texts) delete texts[k]; $("result").classList.add("hidden"); $("quiz").classList.remove("hidden"); render(); };
+render();
+</script>
+</body>
+</html>
